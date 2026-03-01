@@ -27,7 +27,10 @@
       "Bash(NODE=/opt/homebrew/Cellar/node/25.6.1_1/bin/node)",
       "Bash($NODE node_modules/.bin/vite build)",
       "Bash(curl -s http://localhost:8080/api/records.php)",
-      "Bash(lsof -i :5174 -i :5175)"
+      "Bash(lsof -i :5174 -i :5175)",
+      "Bash(lsof -i :5174)",
+      "Bash(/opt/homebrew/Cellar/node/25.6.1_1/bin/node node_modules/.bin/vite build)",
+      "Bash(lsof -i :8081)"
     ]
   }
 }
