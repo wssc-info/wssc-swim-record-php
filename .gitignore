@@ -1,0 +1,10 @@
+# Database credentials — each environment keeps its own copy
+api/db_config.php
+
+# Runtime data files
+data/changes.log
+data/*.tmp
+
+# IDE
+.idea/
+*.iml

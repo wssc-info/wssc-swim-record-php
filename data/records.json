@@ -4,7 +4,7 @@
 
     "teamRecords": {
         "ageGroups": {
-            "9-10": {
+            "8Under": {
                 "girls": [
                     { "event": "25 FREE",          "name": "JANE EVANS",                                       "year": 1992, "time": "16.79" },
                     { "event": "25 BACK",          "name": "JANE EVANS",                                       "year": 1992, "time": "19.24" },
@@ -24,7 +24,7 @@
                     { "event": "100 FREE RELAY",   "name": "A. BAER, S. KANNER, J. CHRISTIANSEN, A. SCHMIDT", "year": 1970, "time": "1:14.20" }
                 ]
             },
-            "11-12": {
+            "9-10": {
                 "girls": [
                     { "event": "50 FREE",          "name": "NICOLE ERVIN",                                           "year": 1981, "time": "32.67" },
                     { "event": "50 BACK",          "name": "JANE EVANS",                                             "year": 1993, "time": "37.83" },
@@ -44,7 +44,7 @@
                     { "event": "200 FREE RELAY",   "name": "C. LEONARD, D. ZICKAU, K. LYNCH, J. FLETCHER",          "year": 1980, "time": "2:20.68" }
                 ]
             },
-            "13-14": {
+            "11-12": {
                 "girls": [
                     { "event": "50 FREE",          "name": "CAROLYN CURRAN",                                         "year": 2006, "time": "29.10" },
                     { "event": "50 BACK",          "name": "CLAUDIA CARSON",                                         "year": 2016, "time": "34.59" },
@@ -64,7 +64,7 @@
                     { "event": "200 FREE RELAY",   "name": "J. MANKE, C. BRADT, P. BONDOC, T. CONSIGNY",            "year": 2011, "time": "2:07.19" }
                 ]
             },
-            "15-18": {
+            "13-14": {
                 "girls": [
                     { "event": "100 FREE",         "name": "ABBY MUNDT",                                             "year": 2005, "time": "1:01.40" },
                     { "event": "100 BACK",         "name": "MARY FIRST",                                             "year": 2012, "time": "1:11.82" },
@@ -84,7 +84,7 @@
                     { "event": "200 FREE RELAY",   "name": "D. KISSIKOV, A. RASMUSSEN, M. RAVELLO, J. WELTON",      "year": 2005, "time": "1:51.58" }
                 ]
             },
-            "15-18_200IM": {
+            "15-18": {
                 "girls": [
                     { "event": "100 FREE",         "name": "AVA PULVERMACHER",                                       "year": 2024, "time": "1:00.88" },
                     { "event": "100 BACK",         "name": "WENDY WOODS",                                            "year": 1989, "time": "1:09.46" },
@@ -109,7 +109,7 @@
 
     "poolRecords": {
         "ageGroups": {
-            "9-10": {
+            "8Under": {
                 "girls": [
                     { "event": "25 FREE",          "name": "CATHY PRESTON",                                          "year": 1987, "time": "16.27" },
                     { "event": "25 BACK",          "name": "MALLORY HEIL",                                           "year": 2019, "time": "19.58" },
@@ -129,7 +129,7 @@
                     { "event": "100 FREE RELAY",   "name": "T. HRENAK, C. PECORIN, B. FISHER, A. ANDING",           "year": 1980, "time": "1:12.37" }
                 ]
             },
-            "11-12": {
+            "9-10": {
                 "girls": [
                     { "event": "50 FREE",          "name": "KENNEDY JOHNSON",                                        "year": 2019, "time": "31.66" },
                     { "event": "50 BACK",          "name": "MOLLY HOPPE",                                            "year": 2019, "time": "35.89" },
@@ -149,7 +149,7 @@
                     { "event": "200 FREE RELAY",   "name": "J. COLLINS, B. GEBHART, C. RADLOFF, P. VESELY",         "year": 2008, "time": "2:12.18" }
                 ]
             },
-            "13-14": {
+            "11-12": {
                 "girls": [
                     { "event": "50 FREE",          "name": "JILLIAN HOLLER",                                         "year": 2019, "time": "28.02" },
                     { "event": "50 BACK",          "name": "AUDREY GARRETT",                                         "year": 2019, "time": "32.26" },
@@ -169,7 +169,7 @@
                     { "event": "200 FREE RELAY",   "name": "J. McKINNON, M. JONES, M. CARTER, B. CUTLER-HEIDERSCHEIT", "year": 2019, "time": "1:59.93" }
                 ]
             },
-            "15-18": {
+            "13-14": {
                 "girls": [
                     { "event": "100 FREE",         "name": "ISABELLE ENZ",                                           "year": 2019, "time": "59.28" },
                     { "event": "100 BACK",         "name": "ISBELLA GONZOLES",                                       "year": 2019, "time": "1:07.46" },
@@ -189,7 +189,7 @@
                     { "event": "200 FREE RELAY",   "name": "C. JIN, L. LAMERS, J. MADOCH, T. CHOEDAK",              "year": 2019, "time": "1:46.50" }
                 ]
             },
-            "15-18_200events": {
+            "15-18": {
                 "girls": [
                     { "event": "100 FREE",         "name": "RUBY MARTIN",                                            "year": 2008, "time": "57.47" },
                     { "event": "100 BACK",         "name": "SARA STEWART",                                           "year": 2019, "time": "1:03.48" },

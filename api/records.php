@@ -16,6 +16,8 @@
  *   }
  */
 
+require_once __DIR__ . '/db_config.php';
+
 // ── CORS headers (allow the Vite dev server + any local origin) ─────────────
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
 header("Access-Control-Allow-Origin: $origin");
@@ -49,15 +51,183 @@ function log_change(string $method, array $context): void {
     file_put_contents($logFile, $line . PHP_EOL, FILE_APPEND | LOCK_EX);
 }
 
+// ── Database helpers ─────────────────────────────────────────────────────────
+
+/** Lazy singleton PDO connection to westside_records. */
+function db(): PDO {
+    static $pdo = null;
+    if ($pdo === null) {
+        $pdo = new PDO(
+            'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+            DB_USER, DB_PASS,
+            [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            ]
+        );
+    }
+    return $pdo;
+}
+
+/** Maps UI panel/title strings to DB enum values. */
+function panel_to_enum(?string $panel, ?string $title): ?string {
+    return match(true) {
+        $panel === 'TEAM SWIMMING RECORDS' => 'team_swimming',
+        $panel === 'POOL SWIMMING RECORDS' => 'pool_swimming',
+        $title === 'TEAM DIVING RECORDS'   => 'team_diving',
+        $title === 'POOL DIVING RECORDS'   => 'pool_diving',
+        default                            => null,
+    };
+}
+
+/**
+ * UPDATE a single record row in the DB.
+ * The AFTER UPDATE trigger will write to records_history automatically.
+ */
+function db_sync_record(string $dbPanel, ?string $ageGroup, string $gender, string $event, array $record): void {
+    $sql = 'UPDATE records
+               SET holder_name = :name,
+                   record_year = :year,
+                   record_time = :time
+             WHERE panel      = :panel
+               AND (age_group = :age_group OR (age_group IS NULL AND :age_group2 IS NULL))
+               AND gender     = :gender
+               AND event      = :event';
+
+    db()->prepare($sql)->execute([
+        ':panel'      => $dbPanel,
+        ':age_group'  => $ageGroup,
+        ':age_group2' => $ageGroup,
+        ':gender'     => $gender,
+        ':event'      => $event,
+        ':name'       => $record['name'],
+        ':year'       => $record['year'],
+        ':time'       => $record['time'],
+    ]);
+}
+
+/**
+ * Full sync: upsert every record from the decoded JSON into the DB.
+ * Used after a POST (full replacement).
+ */
+function db_sync_all(array $data): void {
+    $sql = 'INSERT INTO records (panel, age_group, gender, event, holder_name, record_year, record_time)
+            VALUES (:panel, :age_group, :gender, :event, :name, :year, :time)
+            ON DUPLICATE KEY UPDATE
+                holder_name = VALUES(holder_name),
+                record_year = VALUES(record_year),
+                record_time = VALUES(record_time)';
+    $stmt = db()->prepare($sql);
+
+    // Swimming panels
+    $swimming = [
+        'team_swimming' => $data['teamRecords']['ageGroups'] ?? [],
+        'pool_swimming' => $data['poolRecords']['ageGroups'] ?? [],
+    ];
+    foreach ($swimming as $dbPanel => $ageGroups) {
+        foreach ($ageGroups as $ageKey => $genders) {
+            foreach ($genders as $gender => $rows) {
+                foreach ($rows as $row) {
+                    $stmt->execute([
+                        ':panel'     => $dbPanel,
+                        ':age_group' => $ageKey,
+                        ':gender'    => $gender,
+                        ':event'     => $row['event'],
+                        ':name'      => $row['name'],
+                        ':year'      => $row['year'],
+                        ':time'      => $row['time'],
+                    ]);
+                }
+            }
+        }
+    }
+
+    // Diving panels
+    $diving = [
+        'team_diving' => $data['divingRecords']['team'] ?? [],
+        'pool_diving' => $data['divingRecords']['pool'] ?? [],
+    ];
+    foreach ($diving as $dbPanel => $genders) {
+        foreach ($genders as $gender => $rows) {
+            foreach ($rows as $row) {
+                $stmt->execute([
+                    ':panel'     => $dbPanel,
+                    ':age_group' => null,
+                    ':gender'    => $gender,
+                    ':event'     => $row['ageGroup'],
+                    ':name'      => $row['name'],
+                    ':year'      => $row['year'],
+                    ':time'      => (string)($row['score'] ?? $row['time'] ?? ''),
+                ]);
+            }
+        }
+    }
+}
+
+/**
+ * Query the DB and rebuild the nested structure the React app expects.
+ * pool/year metadata is read from records.json (not stored in the DB).
+ */
+function db_build_response(string $dataFile): array {
+    $meta = file_exists($dataFile)
+        ? (json_decode(file_get_contents($dataFile), true) ?? [])
+        : [];
+
+    $out = [
+        'pool'          => $meta['pool'] ?? 'West Side',
+        'year'          => $meta['year'] ?? (int)date('Y'),
+        'teamRecords'   => ['ageGroups' => []],
+        'poolRecords'   => ['ageGroups' => []],
+        'divingRecords' => ['team' => [], 'pool' => []],
+    ];
+
+    $rows = db()
+        ->query('SELECT panel, age_group, gender, event, holder_name, record_year, record_time
+                   FROM records
+                  ORDER BY id ASC')
+        ->fetchAll();
+
+    foreach ($rows as $row) {
+        $gender = $row['gender'];
+        $event  = $row['event'];
+        $base   = [
+            'name' => $row['holder_name'],
+            'year' => (int)$row['record_year'],
+            'time' => $row['record_time'],
+        ];
+
+        switch ($row['panel']) {
+            case 'team_swimming':
+                $out['teamRecords']['ageGroups'][$row['age_group']][$gender][]
+                    = ['event' => $event] + $base;
+                break;
+
+            case 'pool_swimming':
+                $out['poolRecords']['ageGroups'][$row['age_group']][$gender][]
+                    = ['event' => $event] + $base;
+                break;
+
+            case 'team_diving':
+                $out['divingRecords']['team'][$gender][]
+                    = ['ageGroup' => $event] + $base;
+                break;
+
+            case 'pool_diving':
+                $out['divingRecords']['pool'][$gender][]
+                    = ['ageGroup' => $event] + $base;
+                break;
+        }
+    }
+
+    return $out;
+}
+
 // ── GET ──────────────────────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (!file_exists($dataFile)) {
-        http_response_code(404);
-        echo json_encode(['error' => 'records.json not found']);
-        exit;
-    }
-    // Stream the file unchanged — no re-encoding avoids any float precision loss
-    readfile($dataFile);
+    echo json_encode(
+        db_build_response($dataFile),
+        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+    );
     exit;
 }
 
@@ -103,6 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     rename($tmp, $dataFile);
 
+    db_sync_all($data);
     log_change('POST', ['action' => 'full records replacement', 'bytes' => $written]);
 
     http_response_code(200);
@@ -225,6 +396,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     }
 
     rename($tmp, $dataFile);
+
+    // Sync to DB — the AFTER UPDATE trigger records history automatically
+    $dbPanel   = panel_to_enum($panel, $title);
+    $dbEvent   = $updated['event'] ?? $updated['ageGroup'] ?? '';  // swimming uses 'event', diving uses 'ageGroup'
+    if ($dbPanel && $dbEvent) {
+        db_sync_record($dbPanel, $ageKey, $gender, $dbEvent, $updated);
+    }
 
     // Build a diff of changed fields: "name: Old Name → New Name"
     $diff = [];
