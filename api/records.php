@@ -31,6 +31,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $dataFile = __DIR__ . '/../data/records.json';
+$logFile  = __DIR__ . '/../data/changes.log';
+
+/**
+ * Append a structured line to changes.log.
+ * @param string $method   'PATCH' | 'POST'
+ * @param array  $context  Human-readable key/value pairs for the entry
+ */
+function log_change(string $method, array $context): void {
+    global $logFile;
+    $ts   = date('Y-m-d H:i:s');
+    $ip   = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $line = "[$ts] [$ip] $method";
+    foreach ($context as $k => $v) {
+        $line .= " | $k: $v";
+    }
+    file_put_contents($logFile, $line . PHP_EOL, FILE_APPEND | LOCK_EX);
+}
 
 // ── GET ──────────────────────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -85,6 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     rename($tmp, $dataFile);
+
+    log_change('POST', ['action' => 'full records replacement', 'bytes' => $written]);
 
     http_response_code(200);
     echo json_encode(['ok' => true, 'bytes' => $written]);
@@ -148,10 +167,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
             echo json_encode(['error' => 'Record not found (teamRecords)']);
             exit;
         }
-        $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx] = array_merge(
-            $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx],
-            $updates
-        );
+        $before  = $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx];
+        $section = "Team Swimming / $ageKey / $gender / row $idx";
+        $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx] = array_merge($before, $updates);
         $updated = $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx];
 
     } elseif ($panel === 'POOL SWIMMING RECORDS' && $ageKey) {
@@ -160,10 +178,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
             echo json_encode(['error' => 'Record not found (poolRecords)']);
             exit;
         }
-        $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx] = array_merge(
-            $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx],
-            $updates
-        );
+        $before  = $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx];
+        $section = "Pool Swimming / $ageKey / $gender / row $idx";
+        $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx] = array_merge($before, $updates);
         $updated = $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx];
 
     } elseif ($title === 'TEAM DIVING RECORDS') {
@@ -172,10 +189,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
             echo json_encode(['error' => 'Record not found (divingRecords.team)']);
             exit;
         }
-        $data['divingRecords']['team'][$gender][$idx] = array_merge(
-            $data['divingRecords']['team'][$gender][$idx],
-            $updates
-        );
+        $before  = $data['divingRecords']['team'][$gender][$idx];
+        $section = "Team Diving / $gender / row $idx";
+        $data['divingRecords']['team'][$gender][$idx] = array_merge($before, $updates);
         $updated = $data['divingRecords']['team'][$gender][$idx];
 
     } elseif ($title === 'POOL DIVING RECORDS') {
@@ -184,10 +200,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
             echo json_encode(['error' => 'Record not found (divingRecords.pool)']);
             exit;
         }
-        $data['divingRecords']['pool'][$gender][$idx] = array_merge(
-            $data['divingRecords']['pool'][$gender][$idx],
-            $updates
-        );
+        $before  = $data['divingRecords']['pool'][$gender][$idx];
+        $section = "Pool Diving / $gender / row $idx";
+        $data['divingRecords']['pool'][$gender][$idx] = array_merge($before, $updates);
         $updated = $data['divingRecords']['pool'][$gender][$idx];
 
     } else {
@@ -210,6 +225,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     }
 
     rename($tmp, $dataFile);
+
+    // Build a diff of changed fields: "name: Old Name → New Name"
+    $diff = [];
+    foreach ($updates as $field => $newVal) {
+        $oldVal = $before[$field] ?? '(none)';
+        if ((string)$oldVal !== (string)$newVal) {
+            $diff[] = "$field: $oldVal → $newVal";
+        }
+    }
+    log_change('PATCH', [
+        'section' => $section,
+        'changes' => $diff ? implode(', ', $diff) : 'no change',
+    ]);
 
     http_response_code(200);
     echo json_encode(['ok' => true, 'record' => $updated]);

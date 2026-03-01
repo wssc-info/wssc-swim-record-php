@@ -30,7 +30,15 @@
       "Bash(lsof -i :5174 -i :5175)",
       "Bash(lsof -i :5174)",
       "Bash(/opt/homebrew/Cellar/node/25.6.1_1/bin/node node_modules/.bin/vite build)",
-      "Bash(lsof -i :8081)"
+      "Bash(lsof -i :8081)",
+      "Bash(/opt/homebrew/Cellar/node/25.6.1_1/bin/node -e \"const d=require\\(''fs''\\).readFileSync\\(''/dev/stdin'',''utf8''\\); const j=JSON.parse\\(d\\); console.log\\(''keys:'', Object.keys\\(j\\).join\\('', ''\\)\\);\")",
+      "Bash(curl -s -X PATCH http://localhost:8080/api/records.php -H 'Content-Type: application/json' -d '{\"\"panel\"\":\"\"TEAM SWIMMING RECORDS\"\",\"\"ageKey\"\":\"\"9-10\"\",\"\"gender\"\":\"\"girls\"\",\"\"idx\"\":0,\"\"updates\"\":{\"\"name\"\":\"\"NICOLE ERVIN\"\",\"\"year\"\":1981}}')",
+      "Bash(/opt/homebrew/bin/brew list)",
+      "Bash(/opt/homebrew/bin/brew install mariadb)",
+      "Bash(/opt/homebrew/bin/brew services start mariadb)",
+      "Bash(/opt/homebrew/Cellar/mariadb/12.2.2/bin/mariadb --user=root -e \"SELECT VERSION\\(\\);\")",
+      "Bash(sudo /opt/homebrew/Cellar/mariadb/12.2.2/bin/mariadb --user=root -e \"SELECT VERSION\\(\\);\")",
+      "Bash(/opt/homebrew/Cellar/mariadb/12.2.2/bin/mariadb --user=tony -e \"SELECT VERSION\\(\\);\")"
     ]
   }
 }
