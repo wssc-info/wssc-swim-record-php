@@ -1,0 +1,245 @@
+{
+    "pool": "West Side",
+    "year": 2026,
+
+    "teamRecords": {
+        "ageGroups": {
+            "9-10": {
+                "girls": [
+                    { "event": "25 FREE",          "name": "JANE EVANS",                                       "year": 1992, "time": "16.79" },
+                    { "event": "25 BACK",          "name": "JANE EVANS",                                       "year": 1992, "time": "19.24" },
+                    { "event": "25 BREAST",        "name": "GABRIELA RETANA",                                  "year": 2016, "time": "22.18" },
+                    { "event": "25 FLY",           "name": "DELANEY BONDOC",                                   "year": 2010, "time": "17.84" },
+                    { "event": "100 I.M.",         "name": "DELANEY BONDOC",                                   "year": 2010, "time": "1:32.37" },
+                    { "event": "100 MEDLEY RELAY", "name": "E. POKORNEY, A. GARBER, N. ERVIN, S. HAERTEL",    "year": 1979, "time": "1:24.30" },
+                    { "event": "100 FREE RELAY",   "name": "E. POKORNEY, S. HAERTEL, A. GARBER, N. ERVIN",    "year": 1979, "time": "1:13.30" }
+                ],
+                "boys": [
+                    { "event": "25 FREE",          "name": "MATTHEW HUDSON",                                   "year": 1995, "time": "16.25" },
+                    { "event": "25 BACK",          "name": "A.J. LERNER",                                      "year": 1994, "time": "19.95" },
+                    { "event": "25 BREAST",        "name": "A.J. LERNER",                                      "year": 1994, "time": "20.96" },
+                    { "event": "25 FLY",           "name": "DEVIN HUIE",                                       "year": 2011, "time": "19.38" },
+                    { "event": "100 I.M.",         "name": "GRIFFIN CALLAN",                                   "year": 2009, "time": "1:38.71" },
+                    { "event": "100 MEDLEY RELAY", "name": "M. HUDSON, M. LIPP, H. ASNIEN, J. BRIDWELL",      "year": 1995, "time": "1:27.51" },
+                    { "event": "100 FREE RELAY",   "name": "A. BAER, S. KANNER, J. CHRISTIANSEN, A. SCHMIDT", "year": 1970, "time": "1:14.20" }
+                ]
+            },
+            "11-12": {
+                "girls": [
+                    { "event": "50 FREE",          "name": "NICOLE ERVIN",                                           "year": 1981, "time": "32.67" },
+                    { "event": "50 BACK",          "name": "JANE EVANS",                                             "year": 1993, "time": "37.83" },
+                    { "event": "50 BREAST",        "name": "JULIA SMITH",                                            "year": 1986, "time": "40.41" },
+                    { "event": "50 FLY",           "name": "JANE EVANS",                                             "year": 1993, "time": "35.93" },
+                    { "event": "100 I.M.",         "name": "ABBY MUNDT",                                             "year": 2001, "time": "1:23.62" },
+                    { "event": "200 MEDLEY RELAY", "name": "A. MARSHALL, A. SKOLASKI, K. LINSTROM, P. JASKOWSKI",   "year": 1988, "time": "2:41.14" },
+                    { "event": "200 FREE RELAY",   "name": "K. METICO, J. DONKLE, S. PLOCH, M. FIRST",              "year": 2008, "time": "2:25.25" }
+                ],
+                "boys": [
+                    { "event": "50 FREE",          "name": "JEFF FLETCHER",                                          "year": 1980, "time": "31.67" },
+                    { "event": "50 BACK",          "name": "MATTHEW HUDSON",                                         "year": 1997, "time": "38.09" },
+                    { "event": "50 BREAST",        "name": "A.J. LERNER",                                            "year": 1996, "time": "41.28" },
+                    { "event": "50 FLY",           "name": "JEFF FLETCHER",                                          "year": 1980, "time": "35.68" },
+                    { "event": "100 I.M.",         "name": "JEFF FLETCHER",                                          "year": 1980, "time": "1:19.55" },
+                    { "event": "200 MEDLEY RELAY", "name": "C. LEONARD, J. FLETCHER, D. ZICKAU, K. LYNCH",          "year": 1980, "time": "2:47.40" },
+                    { "event": "200 FREE RELAY",   "name": "C. LEONARD, D. ZICKAU, K. LYNCH, J. FLETCHER",          "year": 1980, "time": "2:20.68" }
+                ]
+            },
+            "13-14": {
+                "girls": [
+                    { "event": "50 FREE",          "name": "CAROLYN CURRAN",                                         "year": 2006, "time": "29.10" },
+                    { "event": "50 BACK",          "name": "CLAUDIA CARSON",                                         "year": 2016, "time": "34.59" },
+                    { "event": "50 BREAST",        "name": "JULIA SMITH",                                            "year": 1988, "time": "37.05" },
+                    { "event": "50 FLY",           "name": "CLAUDIA CARSON",                                         "year": 2016, "time": "32.17" },
+                    { "event": "100 I.M.",         "name": "JACKIE ERVIN",                                           "year": 1980, "time": "1:12.28" },
+                    { "event": "200 MEDLEY RELAY", "name": "A. DEWEY, S. ZICKAU, J. ERVIN, C. FLETCHER",            "year": 1980, "time": "2:18.89" },
+                    { "event": "200 FREE RELAY",   "name": "C. SROMEK, M. HEALY, T. CHAMBERLAIN, A. MUNDT",         "year": 2003, "time": "2:03.34" }
+                ],
+                "boys": [
+                    { "event": "50 FREE",          "name": "DAVID COLLINS",                                          "year": 1989, "time": "28.69" },
+                    { "event": "50 BACK",          "name": "GRIFFIN CALLAN",                                         "year": 2013, "time": "32.97" },
+                    { "event": "50 BREAST",        "name": "MAX BORGERDING",                                         "year": 2018, "time": "38.27" },
+                    { "event": "50 FLY",           "name": "JEFF FLETCHER",                                          "year": 1982, "time": "32.42" },
+                    { "event": "100 I.M.",         "name": "GRIFFIN CALLAN",                                         "year": 2013, "time": "1:11.51" },
+                    { "event": "200 MEDLEY RELAY", "name": "M. KOSIKOWSKI, J. KANNER, P. BAHR, M. DEWEY",           "year": 1971, "time": "2:24.70" },
+                    { "event": "200 FREE RELAY",   "name": "J. MANKE, C. BRADT, P. BONDOC, T. CONSIGNY",            "year": 2011, "time": "2:07.19" }
+                ]
+            },
+            "15-18": {
+                "girls": [
+                    { "event": "100 FREE",         "name": "ABBY MUNDT",                                             "year": 2005, "time": "1:01.40" },
+                    { "event": "100 BACK",         "name": "MARY FIRST",                                             "year": 2012, "time": "1:11.82" },
+                    { "event": "100 BREAST",       "name": "JULIA SMITH",                                            "year": 1989, "time": "1:18.34" },
+                    { "event": "50 FLY",           "name": "CLAUDIA CARSON",                                         "year": 2018, "time": "29.35" },
+                    { "event": "100 I.M.",         "name": "CLAUDIA CARSON",                                         "year": 2018, "time": "1:07.84" },
+                    { "event": "200 MEDLEY RELAY", "name": "K. GRAHAM, S. ZICKAU, A. DEWEY, J. ERVIN",              "year": 1981, "time": "2:13.54" },
+                    { "event": "200 FREE RELAY",   "name": "M. HEALY, C. SROMEK, K. SPENCER, A. MUNDT",             "year": 2005, "time": "1:58.98" }
+                ],
+                "boys": [
+                    { "event": "100 FREE",         "name": "GRIFFIN CALLAN",                                         "year": 2015, "time": "57.09" },
+                    { "event": "100 BACK",         "name": "JOSE ALVAREZ",                                           "year": 2009, "time": "1:08.53" },
+                    { "event": "100 BREAST",       "name": "DAN MORGAN",                                             "year": 2002, "time": "1:17.09" },
+                    { "event": "50 FLY",           "name": "RYAN MENNINGA",                                          "year": 2011, "time": "29.57" },
+                    { "event": "100 I.M.",         "name": "GRIFFIN CALLAN",                                         "year": 2015, "time": "1:05.85" },
+                    { "event": "200 MEDLEY RELAY", "name": "J. ALVAREZ, S. MUTLU, N. MENNINGA, H. PATERSON",        "year": 2009, "time": "2:09.05" },
+                    { "event": "200 FREE RELAY",   "name": "D. KISSIKOV, A. RASMUSSEN, M. RAVELLO, J. WELTON",      "year": 2005, "time": "1:51.58" }
+                ]
+            },
+            "15-18_200IM": {
+                "girls": [
+                    { "event": "100 FREE",         "name": "AVA PULVERMACHER",                                       "year": 2024, "time": "1:00.88" },
+                    { "event": "100 BACK",         "name": "WENDY WOODS",                                            "year": 1989, "time": "1:09.46" },
+                    { "event": "100 BREAST",       "name": "MAGGIE SKILLE",                                          "year": 2003, "time": "1:17.77" },
+                    { "event": "100 FLY",          "name": "MARY FIRST",                                             "year": 2015, "time": "1:08.65" },
+                    { "event": "200 I.M.",         "name": "ABBY MUNDT",                                             "year": 2008, "time": "2:30.03" },
+                    { "event": "200 MEDLEY RELAY", "name": "J. DONKLE, E. BAUMANN, A. WEISS, M. FIRST",             "year": 2013, "time": "2:12.95" },
+                    { "event": "200 FREE RELAY",   "name": "V. CHESNIK, C. SROMEK, J. GERMAN, A. MUNDT",            "year": 2008, "time": "1:58.03" }
+                ],
+                "boys": [
+                    { "event": "100 FREE",         "name": "NICK MENNINGA",                                          "year": 2013, "time": "52.67" },
+                    { "event": "100 BACK",         "name": "JOSE ALVAREZ",                                           "year": 2010, "time": "1:02.89" },
+                    { "event": "100 BREAST",       "name": "SALIH MUTLU",                                            "year": 2013, "time": "1:08.87" },
+                    { "event": "100 FLY",          "name": "RYAN MENNINGA",                                          "year": 2015, "time": "57.31" },
+                    { "event": "200 I.M.",         "name": "ANDY BAER",                                              "year": 1980, "time": "2:18.04" },
+                    { "event": "200 MEDLEY RELAY", "name": "R. MENNINGA, S. MUTLU, G. HAERR-HARTMAN, N. MENNINGA",  "year": 2013, "time": "1:52.64" },
+                    { "event": "200 FREE RELAY",   "name": "R. MENNINGA, S. MUTLU, G. HAERR-HARTMAN, N. MENNINGA",  "year": 2013, "time": "1:40.04" }
+                ]
+            }
+        }
+    },
+
+    "poolRecords": {
+        "ageGroups": {
+            "9-10": {
+                "girls": [
+                    { "event": "25 FREE",          "name": "CATHY PRESTON",                                          "year": 1987, "time": "16.27" },
+                    { "event": "25 BACK",          "name": "MALLORY HEIL",                                           "year": 2019, "time": "19.58" },
+                    { "event": "25 BREAST",        "name": "ANNIKA SLAGER",                                          "year": 2019, "time": "21.51" },
+                    { "event": "25 FLY",           "name": "ABIGAIL FROMMELT",                                       "year": 2019, "time": "16.62" },
+                    { "event": "100 I.M.",         "name": "ABIGAIL FROMMELT",                                       "year": 2019, "time": "1:28.38" },
+                    { "event": "100 MEDLEY RELAY", "name": "E. URBAN, A. SLAGER, M. HEIL, E. GOODAVISH",            "year": 2019, "time": "1:21.99" },
+                    { "event": "100 FREE RELAY",   "name": "A. SEXTON, E. LEHNER, J. PELLEGRINO, H. RENEAU",        "year": 1980, "time": "1:12.86" }
+                ],
+                "boys": [
+                    { "event": "25 FREE",          "name": "BRECKEN CURRAN",                                         "year": 2019, "time": "16.16" },
+                    { "event": "25 BACK",          "name": "HANS HENGEL",                                            "year": 1987, "time": "19.56" },
+                    { "event": "25 BREAST",        "name": "A.J. LERNER",                                            "year": 1994, "time": "20.96" },
+                    { "event": "25 FLY",           "name": "JEREMY TEMPRANO",                                        "year": 2004, "time": "17.76" },
+                    { "event": "100 I.M.",         "name": "BRECKEN CURRAN",                                         "year": 2019, "time": "1:29.13" },
+                    { "event": "100 MEDLEY RELAY", "name": "B. FISHER, A. ANDING, T. HRENAK, C. PECORIN",           "year": 1980, "time": "1:21.37" },
+                    { "event": "100 FREE RELAY",   "name": "T. HRENAK, C. PECORIN, B. FISHER, A. ANDING",           "year": 1980, "time": "1:12.37" }
+                ]
+            },
+            "11-12": {
+                "girls": [
+                    { "event": "50 FREE",          "name": "KENNEDY JOHNSON",                                        "year": 2019, "time": "31.66" },
+                    { "event": "50 BACK",          "name": "MOLLY HOPPE",                                            "year": 2019, "time": "35.89" },
+                    { "event": "50 BREAST",        "name": "GRACE CHARLES",                                          "year": 2019, "time": "39.09" },
+                    { "event": "50 FLY",           "name": "BRYNN SUNDELL",                                          "year": 2019, "time": "34.14" },
+                    { "event": "100 I.M.",         "name": "BRYNN SUNDELL",                                          "year": 2010, "time": "1:16.53" },
+                    { "event": "200 MEDLEY RELAY", "name": "I. LEE, G. CHARLES, B. SUNDELL, C. KIEHL",              "year": 2019, "time": "2:23.74" },
+                    { "event": "200 FREE RELAY",   "name": "I. LEE, G. CHARLES, B. SUNDELL, C. KIEHL",              "year": 2019, "time": "2:09.17" }
+                ],
+                "boys": [
+                    { "event": "50 FREE",          "name": "PRESTON VESELY",                                         "year": 2008, "time": "31.17" },
+                    { "event": "50 BACK",          "name": "PRESTON VESELY",                                         "year": 2008, "time": "35.31" },
+                    { "event": "50 BREAST",        "name": "CONNOR SMITH",                                           "year": 2008, "time": "40.99" },
+                    { "event": "50 FLY",           "name": "JEFF FLETCHER",                                          "year": 1980, "time": "35.68" },
+                    { "event": "100 I.M.",         "name": "JEFF FLETCHER",                                          "year": 1980, "time": "1:19.55" },
+                    { "event": "200 MEDLEY RELAY", "name": "C. RADLOFF, C. SMITH, B. GEBHART, P. VESELY",           "year": 2008, "time": "2:27.77" },
+                    { "event": "200 FREE RELAY",   "name": "J. COLLINS, B. GEBHART, C. RADLOFF, P. VESELY",         "year": 2008, "time": "2:12.18" }
+                ]
+            },
+            "13-14": {
+                "girls": [
+                    { "event": "50 FREE",          "name": "JILLIAN HOLLER",                                         "year": 2019, "time": "28.02" },
+                    { "event": "50 BACK",          "name": "AUDREY GARRETT",                                         "year": 2019, "time": "32.26" },
+                    { "event": "50 BREAST",        "name": "MONICA SCHMIDT",                                         "year": 2019, "time": "35.73" },
+                    { "event": "50 FLY",           "name": "ISABELLA BLOOM",                                         "year": 2019, "time": "30.75" },
+                    { "event": "100 I.M.",         "name": "MONICA SCHMIDT",                                         "year": 2019, "time": "1:08.18" },
+                    { "event": "200 MEDLEY RELAY", "name": "K. McCLURE, M. SCHMIDT, E. SPIELMAN, C. ARNOLD",        "year": 2019, "time": "2:10.78" },
+                    { "event": "200 FREE RELAY",   "name": "K. McCLURE, M. SCHMIDT, E. SPIELMAN, C. ARNOLD",        "year": 2019, "time": "1:58.50" }
+                ],
+                "boys": [
+                    { "event": "50 FREE",          "name": "MAX BORGERDING",                                         "year": 2019, "time": "27.60" },
+                    { "event": "50 BACK",          "name": "TOM SENN",                                               "year": 1980, "time": "32.34" },
+                    { "event": "50 BREAST",        "name": "MAX BORGERDING",                                         "year": 2019, "time": "33.86" },
+                    { "event": "50 FLY",           "name": "ETHAN JOHNSON",                                          "year": 2019, "time": "30.87" },
+                    { "event": "100 I.M.",         "name": "SAMUEL WOLF",                                            "year": 2019, "time": "1:10.10" },
+                    { "event": "200 MEDLEY RELAY", "name": "J. McKINNON, M. JONES, M. CARTER, B. CUTLER-HEIDERSCHEIT", "year": 2019, "time": "2:13.22" },
+                    { "event": "200 FREE RELAY",   "name": "J. McKINNON, M. JONES, M. CARTER, B. CUTLER-HEIDERSCHEIT", "year": 2019, "time": "1:59.93" }
+                ]
+            },
+            "15-18": {
+                "girls": [
+                    { "event": "100 FREE",         "name": "ISABELLE ENZ",                                           "year": 2019, "time": "59.28" },
+                    { "event": "100 BACK",         "name": "ISBELLA GONZOLES",                                       "year": 2019, "time": "1:07.46" },
+                    { "event": "100 BREAST",       "name": "MAKENZIE WALLACE",                                       "year": 2019, "time": "1:17.23" },
+                    { "event": "50 FLY",           "name": "HANNAH MELLO",                                           "year": 2019, "time": "30.15" },
+                    { "event": "100 I.M.",         "name": "ISABELLE ENZ",                                           "year": 2019, "time": "1:07.80" },
+                    { "event": "200 MEDLEY RELAY", "name": "H. MELLO, M. BLAS, I. ENZ, S. VEGA",                    "year": 2019, "time": "2:04.49" },
+                    { "event": "200 FREE RELAY",   "name": "H. MELLO, M. BLAS, I. ENZ, S. VEGA",                    "year": 2019, "time": "1:52.36" }
+                ],
+                "boys": [
+                    { "event": "100 FREE",         "name": "NICHOLAS CHRAFISI",                                      "year": 2019, "time": "54.98" },
+                    { "event": "100 BACK",         "name": "DREW TEDUITS",                                           "year": 2008, "time": "1:01.20" },
+                    { "event": "100 BREAST",       "name": "AVERY BLAS",                                             "year": 2019, "time": "1:10.81" },
+                    { "event": "50 FLY",           "name": "DREW TEDUITS",                                           "year": 2008, "time": "27.03" },
+                    { "event": "100 I.M.",         "name": "TYLER CHOEDAK",                                          "year": 2019, "time": "1:04.92" },
+                    { "event": "200 MEDLEY RELAY", "name": "C. JIN, L. LAMERS, J. MADOCH, T. CHOEDAK",              "year": 2019, "time": "1:59.73" },
+                    { "event": "200 FREE RELAY",   "name": "C. JIN, L. LAMERS, J. MADOCH, T. CHOEDAK",              "year": 2019, "time": "1:46.50" }
+                ]
+            },
+            "15-18_200events": {
+                "girls": [
+                    { "event": "100 FREE",         "name": "RUBY MARTIN",                                            "year": 2008, "time": "57.47" },
+                    { "event": "100 BACK",         "name": "SARA STEWART",                                           "year": 2019, "time": "1:03.48" },
+                    { "event": "100 BREAST",       "name": "KIARA BISSEN",                                           "year": 2019, "time": "1:14.16" },
+                    { "event": "100 FLY",          "name": "KAITLYN BARTH",                                          "year": 2019, "time": "1:03.29" },
+                    { "event": "200 I.M.",         "name": "EMILY KEEBLER",                                          "year": 2019, "time": "2:22.26" },
+                    { "event": "200 MEDLEY RELAY", "name": "S. STEWART, K. BISSEN, J. McCARTNEY, M. BISSEN",        "year": 2019, "time": "2:01.21" },
+                    { "event": "200 FREE RELAY",   "name": "S. STEWART, K. BISSEN, J. McCARTNEY, M. BISSEN",        "year": 2019, "time": "1:50.45" }
+                ],
+                "boys": [
+                    { "event": "100 FREE",         "name": "ANDREW MARTIN",                                          "year": 2019, "time": "51.93" },
+                    { "event": "100 BACK",         "name": "WES JEKEL",                                              "year": 2019, "time": "56.75" },
+                    { "event": "100 BREAST",       "name": "TRUMAN TEDUITS",                                         "year": 2019, "time": "1:04.11" },
+                    { "event": "100 FLY",          "name": "WES JEKEL",                                              "year": 2019, "time": "54.96" },
+                    { "event": "200 I.M.",         "name": "NATHAN KIM",                                             "year": 2019, "time": "2:07.96" },
+                    { "event": "200 MEDLEY RELAY", "name": "B. ZILLNER, T. MONDI, N. KIM, A. MARTIN",               "year": 2019, "time": "1:47.04" },
+                    { "event": "200 FREE RELAY",   "name": "N. GONRING, A. UPDEGROVE, C. FELLER, W. JEKEL",         "year": 2019, "time": "1:36.00" }
+                ]
+            }
+        }
+    },
+
+    "divingRecords": {
+        "team": {
+            "girls": [
+                { "ageGroup": "10 & UNDER", "name": "NATALIE DONKLE", "year": 2010, "time": "168.55" },
+                { "ageGroup": "11 - 12",    "name": "M. PIEFER",       "year": 1993, "time": "210.60" },
+                { "ageGroup": "13 - 14",    "name": "KILEY HEARN",     "year": 2002, "time": "240.05" },
+                { "ageGroup": "15 - 18",    "name": "KILEY HEARN",     "year": 2003, "time": "244.50" }
+            ],
+            "boys": [
+                { "ageGroup": "10 & UNDER", "name": "J. COHEN",     "year": 1980, "time": "145.35" },
+                { "ageGroup": "11 - 12",    "name": "BLAIR WARREN", "year": 2023, "time": "220.10" },
+                { "ageGroup": "13 - 14",    "name": "BLAIR WARREN", "year": 2024, "time": "241.95" },
+                { "ageGroup": "15 - 18",    "name": "FRANK HEARN",  "year": 2015, "time": "276.82" }
+            ]
+        },
+        "pool": {
+            "girls": [
+                { "ageGroup": "10 & UNDER", "name": "NATALIE DONKLE", "year": 2010, "time": "168.55" },
+                { "ageGroup": "11 - 12",    "name": "M. ROSENSTOCK",  "year": 2007, "time": "217.95" },
+                { "ageGroup": "13 - 14",    "name": "QUINN MAZUR",    "year": 2024, "time": "271.55" },
+                { "ageGroup": "15 - 18",    "name": "K. ROSENSTOCK",  "year": 2007, "time": "266.50" }
+            ],
+            "boys": [
+                { "ageGroup": "10 & UNDER", "name": "GRANT BROWN",  "year": 2022, "time": "154.75" },
+                { "ageGroup": "11 - 12",    "name": "BLAIR WARREN", "year": 2023, "time": "220.10" },
+                { "ageGroup": "13 - 14",    "name": "BEN STITGEN",  "year": 2018, "time": "272.00" },
+                { "ageGroup": "15 - 18",    "name": "HENRY CARMAN", "year": 2015, "time": "302.17" }
+            ]
+        }
+    }
+}

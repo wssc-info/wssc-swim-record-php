@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l /Users/tony/IdeaProjects/phpRecordManagement/index.php)",
+      "Bash(php -l /Users/tony/IdeaProjects/phpRecordManagement/edit.php)",
+      "Bash(php -l /Users/tony/IdeaProjects/phpRecordManagement/save.php)",
+      "Bash(brew list)",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(/opt/homebrew/bin/node --version)",
+      "Bash(/opt/homebrew/bin/npm --version)",
+      "Bash(/opt/homebrew/bin/npm create vite@latest west-side-records-react -- --template react)",
+      "Bash(export PATH=\"/opt/homebrew/Cellar/node/25.6.1_1/bin:$PATH\")",
+      "Bash(npm create vite@latest west-side-records-react -- --template react)",
+      "Bash(npm install)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(pkill -f \"vite.*5174\")",
+      "Bash(node node_modules/.bin/vite build)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3 -:*)",
+      "Bash(export PATH=\"/opt/homebrew/Cellar/node/25.6.1_1/bin:/opt/homebrew/bin:$PATH\")",
+      "Bash(npm install html2canvas jspdf)",
+      "Bash(npm install html-to-image)",
+      "Bash(npm run build)",
+      "Bash(/opt/homebrew/bin/npm run build)",
+      "Bash(/opt/homebrew/Cellar/node/25.6.1_1/bin/node /opt/homebrew/Cellar/node/25.6.1_1/bin/npm run build)",
+      "Bash(NODE=/opt/homebrew/Cellar/node/25.6.1_1/bin/node)",
+      "Bash($NODE node_modules/.bin/vite build)",
+      "Bash(curl -s http://localhost:8080/api/records.php)",
+      "Bash(lsof -i :5174 -i :5175)"
+    ]
+  }
+}

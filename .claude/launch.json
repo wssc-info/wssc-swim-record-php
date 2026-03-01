@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "php-server",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["-S", "localhost:8080", "router.php"],
+      "port": 8080,
+      "cwd": "."
+    },
+    {
+      "name": "west-side-records-react",
+      "runtimeExecutable": "/opt/homebrew/Cellar/node/25.6.1_1/bin/node",
+      "runtimeArgs": ["/Users/tony/IdeaProjects/west-side-records-react/node_modules/.bin/vite", "--port", "5174"],
+      "port": 5174,
+      "cwd": "."
+    }
+  ]
+}
