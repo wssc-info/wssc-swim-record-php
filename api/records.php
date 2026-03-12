@@ -299,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     }
 
     // Validate required PATCH fields
-    foreach (['gender', 'idx', 'updates'] as $key) {
+    foreach (['gender', 'updates', 'event'] as $key) {
         if (!array_key_exists($key, $patch)) {
             http_response_code(422);
             echo json_encode(['error' => "Missing required patch field: $key"]);
@@ -307,86 +307,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
         }
     }
 
-    // Load current data from disk
-    if (!file_exists($dataFile)) {
-        http_response_code(404);
-        echo json_encode(['error' => 'records.json not found']);
-        exit;
-    }
-
-    $data = json_decode(file_get_contents($dataFile), true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        http_response_code(500);
-        echo json_encode(['error' => 'Corrupt data file: ' . json_last_error_msg()]);
-        exit;
-    }
+    $panel  = $patch['panel']  ?? null;
+    $title  = $patch['title']  ?? null;
+    $ageKey = $patch['ageKey'] ?? null;   // null for diving panels
+    $gender = $patch['gender'];
+    $event  = $patch['event'];            // natural key: event name (swimming) or ageGroup label (diving)
 
     // Whitelist the fields that may be changed
     $allowed = ['name', 'year', 'time'];
     $updates = array_intersect_key($patch['updates'], array_flip($allowed));
 
-    $panel  = $patch['panel']  ?? null;
-    $title  = $patch['title']  ?? null;
-    $ageKey = $patch['ageKey'] ?? null;
-    $gender = $patch['gender'];
-    $idx    = (int) $patch['idx'];
-
-    // Navigate to the correct record and apply updates
-    if ($panel === 'TEAM SWIMMING RECORDS' && $ageKey) {
-        if (!isset($data['teamRecords']['ageGroups'][$ageKey][$gender][$idx])) {
-            http_response_code(404);
-            echo json_encode(['error' => 'Record not found (teamRecords)']);
-            exit;
-        }
-        $before  = $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx];
-        $section = "Team Swimming / $ageKey / $gender / row $idx";
-        $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx] = array_merge($before, $updates);
-        $updated = $data['teamRecords']['ageGroups'][$ageKey][$gender][$idx];
-
-    } elseif ($panel === 'POOL SWIMMING RECORDS' && $ageKey) {
-        if (!isset($data['poolRecords']['ageGroups'][$ageKey][$gender][$idx])) {
-            http_response_code(404);
-            echo json_encode(['error' => 'Record not found (poolRecords)']);
-            exit;
-        }
-        $before  = $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx];
-        $section = "Pool Swimming / $ageKey / $gender / row $idx";
-        $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx] = array_merge($before, $updates);
-        $updated = $data['poolRecords']['ageGroups'][$ageKey][$gender][$idx];
-
-    } elseif ($title === 'TEAM DIVING RECORDS') {
-        if (!isset($data['divingRecords']['team'][$gender][$idx])) {
-            http_response_code(404);
-            echo json_encode(['error' => 'Record not found (divingRecords.team)']);
-            exit;
-        }
-        $before  = $data['divingRecords']['team'][$gender][$idx];
-        $section = "Team Diving / $gender / row $idx";
-        $data['divingRecords']['team'][$gender][$idx] = array_merge($before, $updates);
-        $updated = $data['divingRecords']['team'][$gender][$idx];
-
-    } elseif ($title === 'POOL DIVING RECORDS') {
-        if (!isset($data['divingRecords']['pool'][$gender][$idx])) {
-            http_response_code(404);
-            echo json_encode(['error' => 'Record not found (divingRecords.pool)']);
-            exit;
-        }
-        $before  = $data['divingRecords']['pool'][$gender][$idx];
-        $section = "Pool Diving / $gender / row $idx";
-        $data['divingRecords']['pool'][$gender][$idx] = array_merge($before, $updates);
-        $updated = $data['divingRecords']['pool'][$gender][$idx];
-
-    } else {
+    $dbPanel = panel_to_enum($panel, $title);
+    if (!$dbPanel) {
         http_response_code(422);
-        echo json_encode(['error' => 'Cannot determine record location from patch payload']);
+        echo json_encode(['error' => 'Cannot determine record panel from patch payload']);
         exit;
     }
 
-    // Write back atomically
+    // Update the record in the DB using its natural key (panel + age_group + gender + event).
+    // The AFTER UPDATE trigger writes history automatically.
+    // Using COALESCE so any field omitted from $updates retains its current DB value.
+    $sql = 'UPDATE records
+               SET holder_name = COALESCE(:name, holder_name),
+                   record_year = COALESCE(:year, record_year),
+                   record_time = COALESCE(:time, record_time)
+             WHERE panel      = :panel
+               AND (age_group = :age_group OR (age_group IS NULL AND :age_group2 IS NULL))
+               AND gender     = :gender
+               AND event      = :event';
+
+    $stmt = db()->prepare($sql);
+    $stmt->execute([
+        ':panel'      => $dbPanel,
+        ':age_group'  => $ageKey,
+        ':age_group2' => $ageKey,
+        ':gender'     => $gender,
+        ':event'      => $event,
+        ':name'       => $updates['name'] ?? null,
+        ':year'       => $updates['year'] ?? null,
+        ':time'       => $updates['time'] ?? null,
+    ]);
+
+    if ($stmt->rowCount() === 0) {
+        http_response_code(404);
+        echo json_encode(['error' => "Record not found: $dbPanel / $ageKey / $gender / $event"]);
+        exit;
+    }
+
+    // Rebuild JSON from DB so it stays in sync with any events added directly to the DB.
+    $newData = db_build_response($dataFile);
     $tmp     = $dataFile . '.tmp';
     $written = file_put_contents(
         $tmp,
-        json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        json_encode($newData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
     );
 
     if ($written === false) {
@@ -397,28 +370,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
 
     rename($tmp, $dataFile);
 
-    // Sync to DB — the AFTER UPDATE trigger records history automatically
-    $dbPanel   = panel_to_enum($panel, $title);
-    $dbEvent   = $updated['event'] ?? $updated['ageGroup'] ?? '';  // swimming uses 'event', diving uses 'ageGroup'
-    if ($dbPanel && $dbEvent) {
-        db_sync_record($dbPanel, $ageKey, $gender, $dbEvent, $updated);
-    }
-
-    // Build a diff of changed fields: "name: Old Name → New Name"
-    $diff = [];
-    foreach ($updates as $field => $newVal) {
-        $oldVal = $before[$field] ?? '(none)';
-        if ((string)$oldVal !== (string)$newVal) {
-            $diff[] = "$field: $oldVal → $newVal";
-        }
-    }
-    log_change('PATCH', [
-        'section' => $section,
-        'changes' => $diff ? implode(', ', $diff) : 'no change',
-    ]);
+    $section = ($panel ?? $title) . ' / ' . ($ageKey ?? 'diving') . ' / ' . $gender . ' / ' . $event;
+    $changes = implode(', ', array_map(fn($k, $v) => "$k → $v", array_keys($updates), $updates));
+    log_change('PATCH', ['section' => $section, 'changes' => $changes ?: 'no change']);
 
     http_response_code(200);
-    echo json_encode(['ok' => true, 'record' => $updated]);
+    echo json_encode(['ok' => true]);
     exit;
 }
 
